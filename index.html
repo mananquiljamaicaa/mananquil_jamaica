@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Personal portfolio of Jamaica Mananquil, an Information Technology student."
+  >
+  <title>Jamaica Mananquil | Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #050908;
+      --surface: #09100e;
+      --primary: #00b978;
+      --primary-light: #51e7b1;
+      --text: #f2f5f3;
+      --muted: #98a39f;
+      --line: rgba(0, 185, 120, 0.18);
+      --content-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 75% 45%,
+          rgba(0, 185, 120, 0.07),
+          transparent 24rem
+        ),
+        var(--bg);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .site-header {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(5, 9, 8, 0.76);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.025);
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar {
+      width: min(calc(100% - 40px), var(--content-width));
+      height: 76px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--primary-light);
+      font-family: "Courier New", monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #6f7774;
+      font-size: 0.74rem;
+      letter-spacing: 1px;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-light);
+    }
+
+    .menu-button {
+      display: none;
+      border: 0;
+      color: var(--primary-light);
+      background: transparent;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      padding: 110px 24px 55px;
+    }
+
+    .hero-content {
+      z-index: 2;
+      width: min(100%, var(--content-width));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      align-items: center;
+      gap: 72px;
+    }
+
+    .intro {
+      max-width: 650px;
+    }
+
+    .eyebrow,
+    .course,
+    .scroll-text,
+    .image-label {
+      color: var(--primary);
+      font-family: "Courier New", monospace;
+    }
+
+    .eyebrow {
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.94;
+      letter-spacing: -4px;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--primary);
+    }
+
+    .course {
+      margin: 22px 0 20px;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    .description {
+      max-width: 560px;
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.85;
+    }
+
+    .actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .button {
+      min-width: 122px;
+      padding: 13px 22px;
+      border: 1px solid var(--primary);
+      border-radius: 5px;
+      color: var(--primary-light);
+      background: transparent;
+      font-family: "Courier New", monospace;
+      font-size: 0.75rem;
+      text-align: center;
+      transition:
+        transform 180ms ease,
+        background 180ms ease,
+        color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .button.primary {
+      color: #03100b;
+      background: var(--primary);
+      font-weight: 700;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      color: #03100b;
+      background: var(--primary-light);
+      box-shadow: 0 9px 28px rgba(0, 185, 120, 0.2);
+    }
+
+    .portrait-section {
+      display: flex;
+      justify-content: center;
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: clamp(240px, 28vw, 340px);
+      aspect-ratio: 1;
+      padding: 6px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      box-shadow:
+        0 0 0 5px rgba(0, 185, 120, 0.12),
+        0 0 25px rgba(0, 255, 166, 0.58),
+        0 0 65px rgba(0, 185, 120, 0.18);
+    }
+
+    .portrait-frame::after {
+      position: absolute;
+      inset: 6px;
+      content: "";
+      border: 4px solid var(--bg);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      background: #f4f4f4;
+    }
+
+    .image-label {
+      position: absolute;
+      z-index: 3;
+      bottom: -8px;
+      left: 50%;
+      padding: 8px 18px;
+      transform: translateX(-50%);
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      color: var(--primary-light);
+      background: var(--surface);
+      font-size: 0.68rem;
+      white-space: nowrap;
+    }
+
+    .circuit {
+      position: absolute;
+      z-index: -1;
+      border-color: var(--line);
+      border-style: solid;
+      opacity: 0.75;
+    }
+
+    .circuit::before,
+    .circuit::after {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      content: "";
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+      background: var(--bg);
+      box-shadow: 0 0 8px rgba(0, 185, 120, 0.45);
+    }
+
+    .circuit.one {
+      top: 11%;
+      left: 0;
+      width: 190px;
+      height: 120px;
+      border-width: 0 0 1px 1px;
+    }
+
+    .circuit.one::after {
+      right: -3px;
+      bottom: -3px;
+    }
+
+    .circuit.two {
+      top: 23%;
+      left: 27%;
+      width: 180px;
+      height: 115px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .circuit.two::after {
+      top: -3px;
+      right: -3px;
+    }
+
+    .circuit.three {
+      top: 10%;
+      right: 27%;
+      width: 110px;
+      height: 160px;
+      border-width: 0 0 1px 1px;
+    }
+
+    .circuit.three::before {
+      bottom: -3px;
+      left: -3px;
+    }
+
+    .circuit.four {
+      right: 0;
+      bottom: 22%;
+      width: 220px;
+      height: 130px;
+      border-width: 1px 0 0 1px;
+    }
+
+    .circuit.four::before {
+      top: -3px;
+      left: -3px;
+    }
+
+    .circuit.five {
+      bottom: 4%;
+      left: 3%;
+      width: 370px;
+      height: 130px;
+      border-width: 0 1px 1px 0;
+    }
+
+    .circuit.five::after {
+      right: -3px;
+      bottom: -3px;
+    }
+
+    .code-mark {
+      position: absolute;
+      z-index: -1;
+      color: rgba(0, 185, 120, 0.13);
+      font-family: "Courier New", monospace;
+      font-size: 1rem;
+    }
+
+    .mark-one {
+      top: 18%;
+      right: 21%;
+    }
+
+    .mark-two {
+      right: 34%;
+      bottom: 12%;
+    }
+
+    .mark-three {
+      bottom: 20%;
+      left: 18%;
+    }
+
+    .scroll-text {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      color: rgba(81, 231, 177, 0.45);
+      font-size: 0.65rem;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 850px) {
+      .navbar {
+        height: 66px;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 66px;
+        right: 20px;
+        width: 190px;
+        padding: 20px;
+        display: none;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(6, 13, 11, 0.97);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 110px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 65px;
+        text-align: center;
+      }
+
+      .intro {
+        margin-inline: auto;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .description {
+        margin-inline: auto;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .portrait-section {
+        grid-row: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding-inline: 20px;
+      }
+
+      .portrait-frame {
+        width: 215px;
+      }
+
+      .course {
+        line-height: 1.5;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .circuit {
+        opacity: 0.4;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="logo" href="#home">&lt;JM /&gt;</a>
+
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        &#9776;
+      </button>
+
+      <ul class="nav-links">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#learning">Learning</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <span class="circuit one" aria-hidden="true"></span>
+      <span class="circuit two" aria-hidden="true"></span>
+      <span class="circuit three" aria-hidden="true"></span>
+      <span class="circuit four" aria-hidden="true"></span>
+      <span class="circuit five" aria-hidden="true"></span>
+
+      <span class="code-mark mark-one" aria-hidden="true">&lt;/&gt;</span>
+      <span class="code-mark mark-two" aria-hidden="true">{ code }</span>
+      <span class="code-mark mark-three" aria-hidden="true">01</span>
+
+      <div class="hero-content">
+        <div class="intro">
+          <p class="eyebrow">&gt; Hello, World! I am_</p>
+
+          <h1>
+            Jamaica
+            <span>Mananquil</span>
+          </h1>
+
+          <p class="course">3rd Year BSIT Student</p>
+
+          <p class="description">
+            I am a third-year Bachelor of Science in Information Technology
+            student who is passionate about learning technology and improving
+            my knowledge step by step. I enjoy exploring programming, web
+            development, and design while continuously building my skills
+            through practice and school projects.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="#about">About Me</a>
+            <a class="button" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="portrait-section">
+          <figure class="portrait-frame">
+            <img
+              src="profile.jpg"
+              alt="Portrait of Jamaica Mananquil"
+            >
+            <figcaption class="image-label">&lt;/ BSIT /&gt;</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <p class="scroll-text">// scroll to explore</p>
+    </section>
+  </main>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+    const links = document.querySelectorAll(".nav-links a");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.innerHTML = isOpen ? "&times;" : "&#9776;";
+    });
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.innerHTML = "&#9776;";
+
+        links.forEach((item) => item.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
